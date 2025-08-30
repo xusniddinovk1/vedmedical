@@ -82,42 +82,42 @@ class CustomPasswordChangeView(PasswordChangeView):
 
 # @login_required_decorator
 # def home_page(request):
-    # users = User.objects.all()
-    # news = News.objects.all()
-    # courses = Course.objects.all()
-    # lessons = Lesson.objects.all()
+# users = User.objects.all()
+# news = News.objects.all()
+# courses = Course.objects.all()
+# lessons = Lesson.objects.all()
 
-    # items = [
-    #     {
-    #         "icon": "fa-users",
-    #         "color": "#3b82f6",  # blue-500
-    #         "count": users.count(),
-    #         "label": "Users",
-    #         "chart_data": [users.count(), users.count() // 2, users.count() // 3]
-    #     },
-    #     {
-    #         "icon": "fa-book",
-    #         "color": "#10b981",  # green-500
-    #         "count": news.count(),
-    #         "label": "News",
-    #         "chart_data": [news.count(), news.count() // 2, news.count() // 3]
-    #     },
-    #     {
-    #         "icon": "fa-bell",
-    #         "color": "#ef4444",  # red-500
-    #         "count": courses.count(),
-    #         "label": "Courses",
-    #         "chart_data": [courses.count(), courses.count() // 2, courses.count() // 3]
-    #     },
-    #     {
-    #         "icon": "fa-star",
-    #         "color": "#facc15",  # yellow-500
-    #         "count": lessons.count(),
-    #         "label": "Lessons",
-    #         "chart_data": [lessons.count(), lessons.count() // 2, lessons.count() // 3]
-    #     },
-    # ]
-    # return render(request, 'dashboard/index.html', {'items': items})
+# items = [
+#     {
+#         "icon": "fa-users",
+#         "color": "#3b82f6",  # blue-500
+#         "count": users.count(),
+#         "label": "Users",
+#         "chart_data": [users.count(), users.count() // 2, users.count() // 3]
+#     },
+#     {
+#         "icon": "fa-book",
+#         "color": "#10b981",  # green-500
+#         "count": news.count(),
+#         "label": "News",
+#         "chart_data": [news.count(), news.count() // 2, news.count() // 3]
+#     },
+#     {
+#         "icon": "fa-bell",
+#         "color": "#ef4444",  # red-500
+#         "count": courses.count(),
+#         "label": "Courses",
+#         "chart_data": [courses.count(), courses.count() // 2, courses.count() // 3]
+#     },
+#     {
+#         "icon": "fa-star",
+#         "color": "#facc15",  # yellow-500
+#         "count": lessons.count(),
+#         "label": "Lessons",
+#         "chart_data": [lessons.count(), lessons.count() // 2, lessons.count() // 3]
+#     },
+# ]
+# return render(request, 'dashboard/index.html', {'items': items})
 
 
 # Generic function for CRUD
@@ -347,3 +347,250 @@ def history_update(request, pk):
 
 def history_delete(request, pk):
     return delete_view(request, History, pk, "dashboard/history/confirm_delete.html", "history_list", "history")
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from medical.models.mics import (
+    ManufacturingOverview, ManufacturingStat, ProductionLine,
+    Partner, PartnershipBenefit, GalleryCategory, Gallery,
+    Category, News
+)
+from .forms import (
+    ManufacturingOverviewForm, ManufacturingStatForm, ProductionLineForm,
+    PartnerForm, PartnershipBenefitForm, GalleryCategoryForm, GalleryForm,
+    CategoryForm, NewsForm
+)
+
+
+# ---------------- MANUFACTURING OVERVIEW ----------------
+def manufacturing_overview_list(request):
+    items = ManufacturingOverview.objects.all()
+    return render(request, 'dashboard/overview/list.html', {'items': items})
+
+def manufacturing_overview_create(request):
+    form = ManufacturingOverviewForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('manufacturing_overview_list')
+    return render(request, 'dashboard/overview/form.html', {'form': form})
+
+def manufacturing_overview_edit(request, id):
+    obj = get_object_or_404(ManufacturingOverview, id=id)
+    form = ManufacturingOverviewForm(request.POST or None, request.FILES or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('manufacturing_overview_list')
+    return render(request, 'dashboard/overview/form.html', {'form': form, 'object': obj})
+
+def manufacturing_overview_delete(request, id):
+    obj = get_object_or_404(ManufacturingOverview, id=id)
+    obj.delete()
+    return redirect('manufacturing_overview_list')
+
+
+# ---------------- MANUFACTURING STAT ----------------
+def manufacturing_stat_list(request):
+    items = ManufacturingStat.objects.all()
+    return render(request, 'dashboard/stat/list.html', {'items': items})
+
+def manufacturing_stat_create(request):
+    form = ManufacturingStatForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('manufacturing_stat_list')
+    return render(request, 'dashboard/stat/form.html', {'form': form})
+
+def manufacturing_stat_edit(request, id):
+    obj = get_object_or_404(ManufacturingStat, id=id)
+    form = ManufacturingStatForm(request.POST or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('manufacturing_stat_list')
+    return render(request, 'dashboard/stat/form.html', {'form': form, 'object': obj})
+
+def manufacturing_stat_delete(request, id):
+    obj = get_object_or_404(ManufacturingStat, id=id)
+    obj.delete()
+    return redirect('manufacturing_stat_list')
+
+
+# ---------------- PRODUCTION LINE ----------------
+def production_line_list(request):
+    items = ProductionLine.objects.all()
+    return render(request, 'dashboard/line/list.html', {'items': items})
+
+def production_line_create(request):
+    form = ProductionLineForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('production_line_list')
+    return render(request, 'dashboard/line/form.html', {'form': form})
+
+def production_line_edit(request, id):
+    obj = get_object_or_404(ProductionLine, id=id)
+    form = ProductionLineForm(request.POST or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('production_line_list')
+    return render(request, 'dashboard/line/form.html', {'form': form, 'object': obj})
+
+def production_line_delete(request, id):
+    obj = get_object_or_404(ProductionLine, id=id)
+    obj.delete()
+    return redirect('production_line_list')
+
+
+# ---------------- PARTNER ----------------
+def partner_list(request):
+    items = Partner.objects.all()
+    return render(request, 'dashboard/partner/list.html', {'items': items})
+
+def partner_create(request):
+    form = PartnerForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('partner_list')
+    return render(request, 'dashboard/partner/form.html', {'form': form})
+
+def partner_edit(request, id):
+    obj = get_object_or_404(Partner, id=id)
+    form = PartnerForm(request.POST or None, request.FILES or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('partner_list')
+    return render(request, 'dashboard/partner/form.html', {'form': form, 'object': obj})
+
+def partner_delete(request, id):
+    obj = get_object_or_404(Partner, id=id)
+    obj.delete()
+    return redirect('partner_list')
+
+
+# ---------------- PARTNERSHIP BENEFIT ----------------
+def partnership_benefit_list(request):
+    items = PartnershipBenefit.objects.all()
+    return render(request, 'dashboard/benefit/list.html', {'items': items})
+
+def partnership_benefit_create(request):
+    form = PartnershipBenefitForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('partnership_benefit_list')
+    return render(request, 'dashboard/benefit/form.html', {'form': form})
+
+def partnership_benefit_edit(request, id):
+    obj = get_object_or_404(PartnershipBenefit, id=id)
+    form = PartnershipBenefitForm(request.POST or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('partnership_benefit_list')
+    return render(request, 'dashboard/benefit/form.html', {'form': form, 'object': obj})
+
+def partnership_benefit_delete(request, id):
+    obj = get_object_or_404(PartnershipBenefit, id=id)
+    obj.delete()
+    return redirect('partnership_benefit_list')
+
+
+# ---------------- GALLERY CATEGORY ----------------
+def gallery_category_list(request):
+    items = GalleryCategory.objects.all()
+    return render(request, 'dashboard/gallery_category/list.html', {'items': items})
+
+def gallery_category_create(request):
+    form = GalleryCategoryForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('gallery_category_list')
+    return render(request, 'dashboard/gallery_category/form.html', {'form': form})
+
+def gallery_category_edit(request, id):
+    obj = get_object_or_404(GalleryCategory, id=id)
+    form = GalleryCategoryForm(request.POST or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('gallery_category_list')
+    return render(request, 'dashboard/gallery_category/form.html', {'form': form, 'object': obj})
+
+def gallery_category_delete(request, id):
+    obj = get_object_or_404(GalleryCategory, id=id)
+    obj.delete()
+    return redirect('gallery_category_list')
+
+
+# ---------------- GALLERY ----------------
+def gallery_list(request):
+    items = Gallery.objects.all()
+    return render(request, 'dashboard/gallery/list.html', {'items': items})
+
+def gallery_create(request):
+    form = GalleryForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('gallery_list')
+    return render(request, 'dashboard/gallery/form.html', {'form': form})
+
+def gallery_edit(request, id):
+    obj = get_object_or_404(Gallery, id=id)
+    form = GalleryForm(request.POST or None, request.FILES or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('gallery_list')
+    return render(request, 'dashboard/gallery/form.html', {'form': form, 'object': obj})
+
+def gallery_delete(request, id):
+    obj = get_object_or_404(Gallery, id=id)
+    obj.delete()
+    return redirect('gallery_list')
+
+
+# ---------------- CATEGORY ----------------
+def category_list(request):
+    items = Category.objects.all()
+    return render(request, 'dashboard/category/list.html', {'items': items})
+
+def category_create(request):
+    form = CategoryForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('category_list')
+    return render(request, 'dashboard/category/form.html', {'form': form})
+
+def category_edit(request, id):
+    obj = get_object_or_404(Category, id=id)
+    form = CategoryForm(request.POST or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('category_list')
+    return render(request, 'dashboard/category/form.html', {'form': form, 'object': obj})
+
+def category_delete(request, id):
+    obj = get_object_or_404(Category, id=id)
+    obj.delete()
+    return redirect('category_list')
+
+
+# ---------------- NEWS ----------------
+def news_list(request):
+    items = News.objects.all()
+    return render(request, 'dashboard/news/list.html', {'items': items})
+
+def news_create(request):
+    form = NewsForm(request.POST or None, request.FILES or None)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('news_list')
+    return render(request, 'dashboard/news/form.html', {'form': form})
+
+def news_edit(request, id):
+    obj = get_object_or_404(News, id=id)
+    form = NewsForm(request.POST or None, request.FILES or None, instance=obj)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return redirect('news_list')
+    return render(request, 'dashboard/news/form.html', {'form': form, 'object': obj})
+
+def news_delete(request, id):
+    obj = get_object_or_404(News, id=id)
+    obj.delete()
+    return redirect('news_list')

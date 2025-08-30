@@ -79,4 +79,58 @@ urlpatterns = [
     path("history/create/", views.history_create, name="history_create"),
     path("history/<int:pk>/update/", views.history_update, name="history_update"),
     path("history/<int:pk>/delete/", views.history_delete, name="history_delete"),
+
+    # ManufacturingOverview
+    path('overview/', views.overview_list, name='overview_list'),
+    path('overview/create/', views.overview_create, name='overview_create'),
+    path('overview/<int:id>/edit/', views.overview_edit, name='overview_edit'),
+    path('overview/<int:id>/delete/', views.overview_delete, name='overview_delete'),
+
+    # ManufacturingStat
+    path('stat/', views.stat_list, name='stat_list'),
+    path('stat/create/', views.stat_create, name='stat_create'),
+    path('stat/<int:id>/edit/', views.stat_edit, name='stat_edit'),
+    path('stat/<int:id>/delete/', views.stat_delete, name='stat_delete'),
+
+    # ProductionLine
+    path('line/', views.line_list, name='line_list'),
+    path('line/create/', views.line_create, name='line_create'),
+    path('line/<int:id>/edit/', views.line_edit, name='line_edit'),
+    path('line/<int:id>/delete/', views.line_delete, name='line_delete'),
+
+    # Partner
+    path('partner/', views.partner_list, name='partner_list'),
+    path('partner/create/', views.partner_create, name='partner_create'),
+    path('partner/<int:id>/edit/', views.partner_edit, name='partner_edit'),
+    path('partner/<int:id>/delete/', views.partner_delete, name='partner_delete'),
+
+    # PartnershipBenefit
+    path('benefit/', views.benefit_list, name='benefit_list'),
+    path('benefit/create/', views.benefit_create, name='benefit_create'),
+    path('benefit/<int:id>/edit/', views.benefit_edit, name='benefit_edit'),
+    path('benefit/<int:id>/delete/', views.benefit_delete, name='benefit_delete'),
+
+    # GalleryCategory
+    path('gallery-category/', views.gallery_category_list, name='gallery_category_list'),
+    path('gallery-category/create/', views.gallery_category_create, name='gallery_category_create'),
+    path('gallery-category/<int:id>/edit/', views.gallery_category_edit, name='gallery_category_edit'),
+    path('gallery-category/<int:id>/delete/', views.gallery_category_delete, name='gallery_category_delete'),
+
+    # Gallery
+    path('gallery/', views.gallery_list, name='gallery_list'),
+    path('gallery/create/', views.gallery_create, name='gallery_create'),
+    path('gallery/<int:id>/edit/', views.gallery_edit, name='gallery_edit'),
+    path('gallery/<int:id>/delete/', views.gallery_delete, name='gallery_delete'),
+
+    # Category
+    path('category/', views.category_list, name='category_list'),
+    path('category/create/', views.category_create, name='category_create'),
+    path('category/<int:id>/edit/', views.category_edit, name='category_edit'),
+    path('category/<int:id>/delete/', views.category_delete, name='category_delete'),
+
+    # News
+    path('news/', views.news_list, name='news_list'),
+    path('news/create/', views.news_create, name='news_create'),
+    path('news/<int:id>/edit/', views.news_edit, name='news_edit'),
+    path('news/<int:id>/delete/', views.news_delete, name='news_delete'),
 ]
