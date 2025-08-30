@@ -1,7 +1,19 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import PasswordChangeDoneView
 
 urlpatterns = [
+    path('', views.home_page, name='home_page'),
+    path('login/', views.login_page, name='login_page'),
+    path('sign-up/', views.signup_page, name='signup_page'),
+    path('logout/', views.logout_page, name='logout_page'),
+
+    path('my-profile', views.my_profile, name='my_profile', ),
+    path('my-profile/edit/', views.profile_edit, name='profile_edit'),
+
+    path('profile/change/', views.CustomPasswordChangeView.as_view(), name='change_password'),
+    path('profile/password/done', PasswordChangeDoneView.as_view(template_name='dashboard/profile/password_done.html'),
+         name='password_change_done'),
     # Service
     path("services/", views.service_list, name="service_list"),
     path("services/create/", views.service_create, name="service_create"),

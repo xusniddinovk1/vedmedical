@@ -1,186 +1,111 @@
-{% extends 'dashboard/base.html' %}
+<!DOCTYPE html>
 {% load static %}
 {% load humanize %}
-{% block content %}
-<div class="page-container">
-    {%include 'dashboard/userbar.html'%}
-    <!-- HEADER DESKTOP-->
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="{% static 'dashboard/js/script.js' %}"></script>
+</head>
+<body>
+<div class="dashboard">
 
-    <!-- MAIN CONTENT-->
-    <div class="main-content">
-        <div class="section__content section__content--p30">
-            <div class="container-fluid">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">AdminPanel</h2>
+        <nav class="nav">
+            <a href="{% url 'home_page' %}" class="nav-link">Dashboard</a>
+            <a href="{% url 'user_list' %}" class="nav-link">Users</a>
+            <a href="{% url 'photo_list' %}" class="nav-link">Main Photo</a>
+            <a href="{% url 'about_us_list' %}" class="nav-link">About Us</a>
+            <a href="{% url 'teachers_list' %}" class="nav-link">Teachers</a>
+            <a href="{% url 'news_list' %}" class="nav-link">News</a>
+            <a href="{% url 'courses_list' %}" class="nav-link">Courses</a>
+            <a href="{% url 'lessons_list' %}" class="nav-link">Lessons</a>
+        </nav>
+    </aside>
 
-                <div class="row m-t-25">
+    <!-- Main Content -->
+    <main class="main-content">
 
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="overview-item overview-item--c1">
-                            <div class="overview__inner">
-                                <div class="overview-box clearfix">
-                                    <div class="icon">
-                                      <i class="fa fa-list-alt"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h2>{{ counts.products|intcomma }}</h2>
-                                        <span>count of products</span>
-                                    </div>
-                                </div>
-                                <div class="overview-chart">
-                                    <div class="chartjs-size-monitor"
-                                         style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                        <div class="chartjs-size-monitor-expand"
-                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                        </div>
-                                        <div class="chartjs-size-monitor-shrink"
-                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Header -->
+        <header class="header">
+            <h1>Boshqaruv paneli</h1>
+            <div class="header-right">
+                <button class="toggle-theme" id="theme-toggle">🌙</button>
+                <div class="userbar" id="userbar">
+                    {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}?v={{ timestamp }}" alt="Avatar"
+                         style="width: 32px; height: 32px; object-fit: cover; border-radius: 50%;">
+                    {% else %}
+                    <img src="https://i.pravatar.cc/100" alt="Default Avatar"
+                         style="width: 32px; height: 32px; object-fit: cover; border-radius: 50%;">
+                    {% endif %}
+                    <span class="username">{{ request.user }}</span>
 
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="overview-item overview-item--c2">
-                            <div class="overview__inner">
-                                <div class="overview-box clearfix">
-                                    <div class="icon">
-                                        <i class="fa fa-list-alt"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h2>{{ counts.categories | intcomma }}</h2>
-                                        <span>Count of Categories</span>
-                                    </div>
-                                </div>
-                                <div class="overview-chart">
-                                    <div class="chartjs-size-monitor"
-                                         style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                        <div class="chartjs-size-monitor-expand"
-                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                        </div>
-                                        <div class="chartjs-size-monitor-shrink"
-                                             style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-                </div>
-                <div><br><h3 class="title-2 m-b-40 text-center">Products by category</h3></div>
-                <div class="row canvas">
-                    <div class="col-md-12">
-                        <div class="overview-wrap">
-
-                             <canvas id="Chart1"></canvas>
-
-                        </div>
+                    <div class="dropdown" id="user-dropdown">
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'my_profile' %}">My Profile</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="{% url 'logout_page' %}">Logout</a></li>
+                        </ul>
                     </div>
                 </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- DATA TABLE-->
-                        <h3 class="text-center">Top sold products</h3>
-                        <div class="table-responsive m-b-40">
-                            <table class="table table-borderless table-data3">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Count</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for t in table_list %}
-                                    <tr>
-                                        <td>{{ forloop.counter }}</td>
-                                        <td>{{ t.title}}</td>
-                                        <td>{{ t.count }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- END DATA TABLE-->
-                    </div>
-                </div>
-
             </div>
+        </header>
+
+        <!-- Cards -->
+        <div class="cards">
+            {% for item in items %}
+            <div class="card">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-3xl" style="color: {{ item.color }}">
+                        <i class="fa {{ item.icon }}"></i>
+                    </div>
+                    <div class="text-right">
+                        <h2 class="text-xl font-bold">{{ item.count|intcomma }}</h2>
+                        <p class="text-sm text-gray-500">{{ item.label }}</p>
+                    </div>
+                </div>
+                <canvas id="chart-{{ forloop.counter }}" height="80"></canvas>
+            </div>
+            {% endfor %}
         </div>
-    </div>
-    <!-- END MAIN CONTENT-->
-    <!-- END PAGE CONTAINER-->
+    </main>
 </div>
 
-
-{% endblock %}
-{% block javascript %}
+<!-- Chart Rendering -->
 <script>
-
-(function ($){
-  try {
-
-    var ctx = document.getElementById("Chart1");
-    if (ctx) {
-      ctx.height = 150;
-      var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: [{% for cp in categories_products %}"{{ cp.category }}",{% endfor %}],
-          datasets: [
-            {
-              label: "My First dataset",
-              data: [{% for cp in categories_products %}"{{ cp.product }}",{% endfor %}],
-              borderColor: "rgba(0, 123, 255, 0.9)",
-              borderWidth: "0",
-              backgroundColor: "rgba(0, 123, 255, 0.5)"
-            }
-          ]
-        },
-        options: {
-          legend: {
-            position: 'top',
-            labels: {
-              fontFamily: 'Poppins'
-            }
-
-          },
-          scales: {
-            xAxes: [{
-              ticks: {
-                fontFamily: "Poppins"
-
-              }
-            }],
-            yAxes: [{
-              ticks: {
-                beginAtZero: true,
-                fontFamily: "Poppins"
-              }
-            }]
-          }
+    {% for item in items %}
+    const ctx{{ forloop.counter }} = document.getElementById("chart-{{ forloop.counter }}").getContext("2d");
+    new Chart(ctx{{ forloop.counter }}, {
+      type: 'bar',
+      data: {
+        labels: ['A', 'B', 'C'],
+        datasets: [{
+          label: '{{ item.label }}',
+          data: {{ item.chart_data|safe }},
+          backgroundColor: 'rgba(59, 130, 246, 0.6)',
+          borderRadius: 5,
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { display: false },
+          y: { display: false }
         }
-      });
-    }
-
-  } catch (error) {
-    console.log(error);
-  }
-})(jQuery);
+      }
+    });
+    {% endfor %}
 </script>
-{% endblock %}
-
-
-
+</body>
+</html>
 
 
