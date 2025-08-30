@@ -4,17 +4,6 @@ from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 
-from medical.models import (
-    Service, Feature, Contact, Internet,
-    Mission, MissionPoint, Statistic, Value,
-    Achievement, Member, History
-)
-from .forms import (
-    ServiceForm, FeatureForm, ContactForm, InternetForm,
-    MissionForm, MissionPointForm, StatisticForm, ValueForm,
-    AchievementForm, MemberForm, HistoryForm, ProfileForm
-)
-
 
 def login_required_decorator(func):
     return login_required(func, login_url='login_page')
@@ -128,7 +117,7 @@ from medical.models import (
 from .forms import (
     ServiceForm, FeatureForm, ContactForm, InternetForm,
     MissionForm, MissionPointForm, StatisticForm, ValueForm,
-    AchievementForm, MemberForm, HistoryForm
+    AchievementForm, MemberForm, HistoryForm, ProfileForm
 )
 
 
