@@ -3,6 +3,26 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from medical.models import (
+    Service, Feature, Contact, Internet,
+    Mission, MissionPoint, Statistic, Value,
+    Achievement, Member, History
+)
+from .forms import (
+    ServiceForm, FeatureForm, ContactForm, InternetForm,
+    MissionForm, MissionPointForm, StatisticForm, ValueForm,
+    AchievementForm, MemberForm, HistoryForm, ProfileForm
+)
+from medical.models.mics import (
+    ManufacturingOverview, ManufacturingStat, ProductionLine,
+    Partner, PartnershipBenefit, GalleryCategory, Gallery,
+    Category, News
+)
+from .forms import (
+    ManufacturingOverviewForm, ManufacturingStatForm, ProductionLineForm,
+    PartnerForm, PartnershipBenefitForm, GalleryCategoryForm, GalleryForm,
+    CategoryForm, NewsForm
+)
 
 
 def login_required_decorator(func):
@@ -13,17 +33,10 @@ def login_page(request):
     if request.method == "POST":
         phone = request.POST.get("phone_number")
         password = request.POST.get("password")
-        remember = request.POST.get("remember_me")  # checkbox nomi
 
         user = authenticate(request, phone_number=phone, password=password)
         if user:
             login(request, user)
-
-            if not remember:
-                # Sessiyani brauzer yopilganda tugatish
-                request.session.set_expiry(0)
-
-            return redirect("home_page")
         else:
             return render(request, "dashboard/login.html", {"error": "Incorrect credentials"})
 
@@ -51,7 +64,7 @@ def profile_edit(request):
         form = ProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('my_profile')  # profil sahifasiga qaytish
+            return redirect('my_profile')
     else:
         form = ProfileForm(instance=user)
 
@@ -108,22 +121,6 @@ class CustomPasswordChangeView(PasswordChangeView):
 # return render(request, 'dashboard/index.html', {'items': items})
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from medical.models import (
-    Service, Feature, Contact, Internet,
-    Mission, MissionPoint, Statistic, Value,
-    Achievement, Member, History
-)
-from .forms import (
-    ServiceForm, FeatureForm, ContactForm, InternetForm,
-    MissionForm, MissionPointForm, StatisticForm, ValueForm,
-    AchievementForm, MemberForm, HistoryForm, ProfileForm
-)
-
-
-# ==============================
-# SERVICE VIEWS
-# ==============================
 def service_list(request):
     services = Service.objects.all()
     return render(request, "dashboard/service/list.html", {"services": services})
@@ -462,18 +459,6 @@ def history_delete(request, id):
     return redirect("history_list")
 
 
-from medical.models.mics import (
-    ManufacturingOverview, ManufacturingStat, ProductionLine,
-    Partner, PartnershipBenefit, GalleryCategory, Gallery,
-    Category, News
-)
-from .forms import (
-    ManufacturingOverviewForm, ManufacturingStatForm, ProductionLineForm,
-    PartnerForm, PartnershipBenefitForm, GalleryCategoryForm, GalleryForm,
-    CategoryForm, NewsForm
-)
-
-
 # ---------------- MANUFACTURING OVERVIEW ----------------
 def manufacturing_overview_list(request):
     items = ManufacturingOverview.objects.all()
@@ -752,12 +737,12 @@ from .forms import (
 )
 
 
-def category_list(request):
+def product_category_list(request):
     categories = ProductCategory.objects.all()
     return render(request, "dashboard/category/list.html", {"categories": categories})
 
 
-def category_create(request):
+def product_category_create(request):
     form = ProductCategoryForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         form.save()
@@ -765,7 +750,7 @@ def category_create(request):
     return render(request, "dashboard/category/form.html", {"form": form})
 
 
-def category_edit(request, id):
+def product_category_edit(request, id):
     category = get_object_or_404(ProductCategory, id=id)
     form = ProductCategoryForm(request.POST or None, instance=category)
     if request.method == "POST" and form.is_valid():
@@ -774,7 +759,7 @@ def category_edit(request, id):
     return render(request, "dashboard/category/form.html", {"form": form, "category": category})
 
 
-def category_delete(request, id):
+def product_category_delete(request, id):
     category = get_object_or_404(ProductCategory, id=id)
     category.delete()
     return redirect("category_list")
@@ -814,12 +799,12 @@ def product_delete(request, id):
 # ==============================
 # PRODUCT FEATURE CRUD
 # ==============================
-def feature_list(request):
+def product_feature_list(request):
     features = ProductFeature.objects.all()
     return render(request, "dashboard/feature/list.html", {"features": features})
 
 
-def feature_create(request):
+def product_feature_create(request):
     form = ProductFeatureForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         form.save()
@@ -827,7 +812,7 @@ def feature_create(request):
     return render(request, "dashboard/feature/form.html", {"form": form})
 
 
-def feature_edit(request, id):
+def product_feature_edit(request, id):
     feature = get_object_or_404(ProductFeature, id=id)
     form = ProductFeatureForm(request.POST or None, instance=feature)
     if request.method == "POST" and form.is_valid():
@@ -836,7 +821,7 @@ def feature_edit(request, id):
     return render(request, "dashboard/feature/form.html", {"form": form, "feature": feature})
 
 
-def feature_delete(request, id):
+def product_feature_delete(request, id):
     feature = get_object_or_404(ProductFeature, id=id)
     feature.delete()
     return redirect("feature_list")
