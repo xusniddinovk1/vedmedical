@@ -69,10 +69,10 @@ urlpatterns = [
     path('news/<int:id>/delete/', views.news_delete, name='news_delete'),
 
     # ==============================
-    path("categories/", views.category_list, name="category_list"),
-    path("categories/create/", views.category_create, name="category_create"),
-    path("categories/<int:id>/edit/", views.category_edit, name="category_edit"),
-    path("categories/<int:id>/delete/", views.category_delete, name="category_delete"),
+    path("categories/", views.product_category_list, name="product_category_list"),
+    path("categories/create/", views.product_category_create, name="product_category_create"),
+    path("categories/<int:id>/edit/", views.product_category_edit, name="product_category_edit"),
+    path("categories/<int:id>/delete/", views.product_category_delete, name="product_category_delete"),
 
     # ==============================
     # PRODUCT URLS
@@ -113,10 +113,10 @@ urlpatterns = [
     path("services/<int:id>/delete/", views.service_delete, name="service_delete"),
 
     # Feature
-    path("features/", views.feature_list, name="feature_list"),
-    path("features/create/", views.feature_create, name="feature_create"),
-    path("features/<int:id>/edit/", views.feature_edit, name="feature_edit"),
-    path("features/<int:id>/delete/", views.feature_delete, name="feature_delete"),
+    path("features/", views.product_feature_list, name="product_feature_list"),
+    path("features/create/", views.product_feature_create, name="product_feature_create"),
+    path("features/<int:id>/edit/", views.product_feature_edit, name="product_feature_edit"),
+    path("features/<int:id>/delete/", views.product_feature_delete, name="product_feature_delete"),
 
     # Contact
     path("contacts/", views.contact_list, name="contact_list"),
