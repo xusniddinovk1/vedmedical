@@ -90,6 +90,17 @@ def product_detail(request, pk):
     })
 
 
-def news_list(request):
-    news = News.objects.all().order_by("-date")
-    return render(request, "medical/news.html", {"news_list": news})
+def news_page(request):
+    educations = News.objects.all()
+    ctx = {
+        "educations": educations
+    }
+    return render(request, 'medical/news.html', ctx)
+
+
+def news_detail(request, id):
+    education = get_object_or_404(News, pk=id)
+    ctx = {
+        'education': education
+    }
+    return render(request, 'medical/news_detail.html', ctx)

@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 {% load static %}
 {% load humanize %}
-<html lang="en">
+<html lang="uz">
 <head>
-    <meta charset="UTF-8"/>
-    <title>{{ education.title }}</title>
-    <link
-            rel="stylesheet"
-            href="{% static 'medical/css/style.css' %}"
-    />
-    <script
-            src="https://kit.fontawesome.com/5974a913f2.js"
-            crossorigin="anonymous"
-    ></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedmedical - Uy hayvonlari uchun vaksinalar va dori-darmonlar</title>
+    <link rel="stylesheet" href="{% static 'medical/css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <main class="activities-container">
@@ -27,7 +25,7 @@
         </div>
         <div class="activity-text">
             <h1>{{ education.title }}</h1>
-            <p>{{ education.description }}</p>
+            <p>{{ education.content }}</p>
         </div>
     </div>
 </main>

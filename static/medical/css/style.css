@@ -3105,22 +3105,21 @@ body {
   margin: 0.5rem 0;
 }
 
-.btn {
-  background-color: #000;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  display: inline-block;
-  margin-top: 0.5rem;
-  transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-  border: none;
-  cursor: pointer;
+.btn1 {
+    display: inline-flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
-.btn:hover {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid black;
+.btn1:hover {
+    background: #f8fafc;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 /* === Modal === */
