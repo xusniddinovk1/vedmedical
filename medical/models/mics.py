@@ -13,11 +13,6 @@ class ManufacturingOverview(models.Model):
 class ManufacturingStat(models.Model):
     number = models.CharField(max_length=50)
     label = models.CharField(max_length=255)
-    overview = models.ForeignKey(
-        ManufacturingOverview,
-        on_delete=models.CASCADE,
-        related_name="stats"
-    )
 
     def __str__(self):
         return f"{self.number} {self.label}"
@@ -55,7 +50,6 @@ class PartnershipBenefit(models.Model):
 
 class GalleryCategory(models.Model):
     name = models.CharField(max_length=100, unique=True)  # Masalan: "Binolar", "Mahsulotlar"
-    slug = models.SlugField(max_length=100, unique=True)  # URL yoki filter uchun
 
     class Meta:
         verbose_name = "Galereya Kategoriya"
@@ -91,7 +85,7 @@ class News(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to="news/")
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="news")
 
     def __str__(self):

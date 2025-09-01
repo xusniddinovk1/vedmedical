@@ -1,7 +1,7 @@
 {% extends 'dashboard/base.html' %}
 {% load humanize %}
 
-{% block title %}About Us List{% endblock %}
+{% block title %}News List{% endblock %}
 {% block page_header %}News List{% endblock %}
 
 {% block content %}
@@ -14,18 +14,17 @@
             <thead>
             <tr>
                 <th class="title">Sarlavha</th>
-                <th class="slug">Slug</th>
                 <th class="description">Tavsif</th>
                 <th class="image">Rasm</th>
+                <th class="category">Kategoriya</th>
                 <th class="created">Yaratilgan</th>
                 <th class="actions">Amallar</th>
             </tr>
             </thead>
             <tbody>
-            {% for txt in news_item %}
+            {% for txt in items %}
             <tr>
                 <td class="title">{{ txt.title }}</td>
-                <td class="slug">{{ txt.slug }}</td>
                 <td class="description">{{ txt.content|truncatechars:50 }}</td>
                 <td class="image">
                     {% if txt.image %}
@@ -34,11 +33,12 @@
                     Yo‘q
                     {% endif %}
                 </td>
+                <td class="category">{{ txt.category }}</td>
                 <td class="created">{{ txt.created_at|date:"Y-m-d H:i" }}</td>
 
                 <td class="actions">
-                    <a href="{% url 'news_edit' txt.slug %}" class="btn btn-warning btn-sm">✏️</a>
-                    <a href="{% url 'news_delete' txt.slug %}" class="btn btn-danger btn-sm">🗑️</a>
+                    <a href="{% url 'news_edit' txt.id %}" class="btn btn-warning btn-sm">✏️</a>
+                    <a href="{% url 'news_delete' txt.id %}" class="btn btn-danger btn-sm">🗑️</a>
                 </td>
             </tr>
             {% empty %}

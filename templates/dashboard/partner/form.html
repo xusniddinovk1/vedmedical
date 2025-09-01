@@ -5,14 +5,14 @@
 {% with show_userbar=False %}
 {% block content %}
 <div class="form-container">
-    <h2 class="form-title">Lessons</h2>  <!-- Qo‘shilgan sarlavha -->
+    <h2 class="form-title">Hamkorlar</h2>  <!-- Qo‘shilgan sarlavha -->
     <form method="post" enctype="multipart/form-data" class="styled-form">
         {% csrf_token %}
         {{ form.non_field_errors }}
 
         <div class="form-group">
-            <label for="{{ form.title.id_for_label }}">Sarlavha</label>
-            {{ form.title }}
+            <label for="{{ form.title.id_for_label }}">Nomi</label>
+            {{ form.name }}
         </div>
 
         <div class="form-group">
@@ -21,32 +21,17 @@
         </div>
 
         <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image }}
+            <label for="{{ form.image.id_for_label }}">Logo</label>
+            {{ form.logo }}
         </div>
 
         <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Tavsif</label>
-            {{ form.description1 }}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image1 }}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Tavsif</label>
-            {{ form.description2 }}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image2 }}
+            <label for="{{ form.description.id_for_label }}">Web sahifasi</label>
+            {{ form.website }}
         </div>
         <div class="form-buttons">
             <button type="submit" class="submit-btn">💾 Saqlash</button>
-            <a href="{% url 'lessons_list' %}" class="cancel-btn">⬅️ Orqaga</a>
+            <a href="{% url 'partner_list' %}" class="cancel-btn">⬅️ Orqaga</a>
         </div>
     </form>
 </div>

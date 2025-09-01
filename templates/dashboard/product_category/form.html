@@ -5,23 +5,18 @@
 {% with show_userbar=False %}
 {% block content %}
 <div class="form-container">
-    <h2 class="form-title">Rasmlar</h2>  <!-- Qo‘shilgan sarlavha -->
+    <h2 class="form-title">Kategoriya</h2>  <!-- Qo‘shilgan sarlavha -->
     <form method="post" enctype="multipart/form-data" class="styled-form">
         {% csrf_token %}
         {{ form.non_field_errors }}
 
         <div class="form-group">
-            <label for="{{ form.title.id_for_label }}">Mahsulot</label>
-            {{ form.product }}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image }}
+            <label for="{{ form.title.id_for_label }}">Nomi</label>
+            {{ form.name }}
         </div>
         <div class="form-buttons">
             <button type="submit" class="submit-btn">💾 Saqlash</button>
-            <a href="{% url 'image_list' %}" class="cancel-btn">⬅️ Orqaga</a>
+            <a href="{% url 'product_category_list' %}" class="cancel-btn">⬅️ Orqaga</a>
         </div>
     </form>
 </div>

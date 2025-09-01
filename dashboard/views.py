@@ -1,28 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from medical.models import (
-    Service, Feature, Contact, Internet,
-    Mission, MissionPoint, Statistic, Value,
-    Achievement, Member, History
-)
-from .forms import (
-    ServiceForm, FeatureForm, ContactForm, InternetForm,
-    MissionForm, MissionPointForm, StatisticForm, ValueForm,
-    AchievementForm, MemberForm, HistoryForm, ProfileForm
-)
-from medical.models.mics import (
-    ManufacturingOverview, ManufacturingStat, ProductionLine,
-    Partner, PartnershipBenefit, GalleryCategory, Gallery,
-    Category, News
-)
-from .forms import (
-    ManufacturingOverviewForm, ManufacturingStatForm, ProductionLineForm,
-    PartnerForm, PartnershipBenefitForm, GalleryCategoryForm, GalleryForm,
-    CategoryForm, NewsForm
-)
+from medical.models import *
+from .forms import *
 
 
 def login_required_decorator(func):
@@ -81,44 +64,91 @@ class CustomPasswordChangeView(PasswordChangeView):
     success_url = reverse_lazy('password_change_done')
 
 
-# @login_required_decorator
-# def home_page(request):
-# users = User.objects.all()
-# news = News.objects.all()
-# courses = Course.objects.all()
-# lessons = Lesson.objects.all()
+@login_required_decorator
+def home_page(request):
+    products = Product.objects.all()
+    news = News.objects.all()
+    partners = Partner.objects.all()
+    members = Member.objects.all()
+    galleries = Gallery.objects.all()
+    product_categories = ProductCategory.objects.all()
+    features = Feature.objects.all()
+    statistics = Statistic.objects.all()
+    achievements = Achievement.objects.all()
 
-# items = [
-#     {
-#         "icon": "fa-users",
-#         "color": "#3b82f6",  # blue-500
-#         "count": users.count(),
-#         "label": "Users",
-#         "chart_data": [users.count(), users.count() // 2, users.count() // 3]
-#     },
-#     {
-#         "icon": "fa-book",
-#         "color": "#10b981",  # green-500
-#         "count": news.count(),
-#         "label": "News",
-#         "chart_data": [news.count(), news.count() // 2, news.count() // 3]
-#     },
-#     {
-#         "icon": "fa-bell",
-#         "color": "#ef4444",  # red-500
-#         "count": courses.count(),
-#         "label": "Courses",
-#         "chart_data": [courses.count(), courses.count() // 2, courses.count() // 3]
-#     },
-#     {
-#         "icon": "fa-star",
-#         "color": "#facc15",  # yellow-500
-#         "count": lessons.count(),
-#         "label": "Lessons",
-#         "chart_data": [lessons.count(), lessons.count() // 2, lessons.count() // 3]
-#     },
-# ]
-# return render(request, 'dashboard/index.html', {'items': items})
+    items = [
+        {
+            "icon": "fa-users",
+            "color": "#3b82f6",  # blue-500
+            "count": products.count(),
+            "label": "Users",
+            "chart_data": [products.count(), products.count() // 2, products.count() // 3]
+        },
+        {
+            "icon": "fa-book",
+            "color": "#10b981",  # green-500
+            "count": news.count(),
+            "label": "News",
+            "chart_data": [news.count(), news.count() // 2, news.count() // 3]
+        },
+        {
+            "icon": "fa-bell",
+            "color": "#ef4444",  # red-500
+            "count": partners.count(),
+            "label": "Courses",
+            "chart_data": [partners.count(), partners.count() // 2, partners.count() // 3]
+        },
+        {
+            "icon": "fa-star",
+            "color": "#facc15",  # yellow-500
+            "count": members.count(),
+            "label": "Lessons",
+            "chart_data": [members.count(), members.count() // 2, members.count() // 3]
+        },
+        {
+            "icon": "fa-users",
+            "color": "#3b82f6",  # blue-500
+            "count": galleries.count(),
+            "label": "Users",
+            "chart_data": [galleries.count(), galleries.count() // 2, galleries.count() // 3]
+        },
+        {
+            "icon": "fa-book",
+            "color": "#10b981",  # green-500
+            "count": news.count(),
+            "label": "News",
+            "chart_data": [news.count(), news.count() // 2, news.count() // 3]
+        },
+        {
+            "icon": "fa-bell",
+            "color": "#ef4444",  # red-500
+            "count": product_categories.count(),
+            "label": "Courses",
+            "chart_data": [product_categories.count(), product_categories.count() // 2, product_categories.count() // 3]
+        },
+        {
+            "icon": "fa-star",
+            "color": "#facc15",  # yellow-500
+            "count": features.count(),
+            "label": "Lessons",
+            "chart_data": [features.count(), features.count() // 2, features.count() // 3]
+        },
+        {
+            "icon": "fa-users",
+            "color": "#3b82f6",  # blue-500
+            "count": statistics.count(),
+            "label": "Users",
+            "chart_data": [statistics.count(), statistics.count() // 2, statistics.count() // 3]
+        },
+        {
+            "icon": "fa-book",
+            "color": "#10b981",  # green-500
+            "count": achievements.count(),
+            "label": "News",
+            "chart_data": [achievements.count(), achievements.count() // 2, achievements.count() // 3]
+        },
+    ]
+    return render(request, 'dashboard/index.html', {'items': items})
 
 
 def service_list(request):
@@ -720,23 +750,6 @@ def news_delete(request, id):
     return redirect('news_list')
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from medical.models import (
-    ProductCategory,
-    Product,
-    ProductFeature,
-    ProductImage,
-    ProductReview,
-)
-from .forms import (
-    ProductCategoryForm,
-    ProductForm,
-    ProductFeatureForm,
-    ProductImageForm,
-    ProductReviewForm,
-)
-
-
 def product_category_list(request):
     categories = ProductCategory.objects.all()
     return render(request, "dashboard/category/list.html", {"categories": categories})
@@ -801,15 +814,15 @@ def product_delete(request, id):
 # ==============================
 def product_feature_list(request):
     features = ProductFeature.objects.all()
-    return render(request, "dashboard/feature/list.html", {"features": features})
+    return render(request, "dashboard/product_feature/list.html", {"features": features})
 
 
 def product_feature_create(request):
     form = ProductFeatureForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect("feature_list")
-    return render(request, "dashboard/feature/form.html", {"form": form})
+        return redirect("product_feature_list")
+    return render(request, "dashboard/product_feature/form.html", {"form": form})
 
 
 def product_feature_edit(request, id):
@@ -817,14 +830,14 @@ def product_feature_edit(request, id):
     form = ProductFeatureForm(request.POST or None, instance=feature)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect("feature_list")
-    return render(request, "dashboard/feature/form.html", {"form": form, "feature": feature})
+        return redirect("product_feature_list")
+    return render(request, "dashboard/product_feature/form.html", {"form": form, "feature": feature})
 
 
 def product_feature_delete(request, id):
     feature = get_object_or_404(ProductFeature, id=id)
     feature.delete()
-    return redirect("feature_list")
+    return redirect("product_feature_list")
 
 
 # ==============================
@@ -856,34 +869,3 @@ def image_delete(request, id):
     image = get_object_or_404(ProductImage, id=id)
     image.delete()
     return redirect("image_list")
-
-
-# ==============================
-# PRODUCT REVIEW CRUD
-# ==============================
-def review_list(request):
-    reviews = ProductReview.objects.all()
-    return render(request, "dashboard/review/list.html", {"reviews": reviews})
-
-
-def review_create(request):
-    form = ProductReviewForm(request.POST or None)
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        return redirect("review_list")
-    return render(request, "dashboard/review/form.html", {"form": form})
-
-
-def review_edit(request, id):
-    review = get_object_or_404(ProductReview, id=id)
-    form = ProductReviewForm(request.POST or None, instance=review)
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        return redirect("review_list")
-    return render(request, "dashboard/review/form.html", {"form": form, "review": review})
-
-
-def review_delete(request, id):
-    review = get_object_or_404(ProductReview, id=id)
-    review.delete()
-    return redirect("review_list")

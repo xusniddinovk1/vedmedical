@@ -21,33 +21,14 @@
         </div>
 
         <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image }}
+            <label for="{{ form.image.id_for_label }}">Ikonka</label>
+            {{ form.icon }}
         </div>
-
         <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Tavsif</label>
-            {{ form.description1 }}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image1 }}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Tavsif</label>
-            {{ form.description2 }}
-        </div>
-
-        <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image2 }}
-        </div>
-        <div class="form-buttons">
-            <button type="submit" class="submit-btn">💾 Saqlash</button>
-            <a href="{% url 'lessons_list' %}" class="cancel-btn">⬅️ Orqaga</a>
-        </div>
+            <div class="form-buttons">
+                <button type="submit" class="submit-btn">💾 Saqlash</button>
+                <a href="{% url 'service_list' %}" class="cancel-btn">⬅️ Orqaga</a>
+            </div>
     </form>
 </div>
 {% endblock %}

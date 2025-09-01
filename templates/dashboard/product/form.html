@@ -5,7 +5,7 @@
 {% with show_userbar=False %}
 {% block content %}
 <div class="form-container">
-    <h2 class="form-title">Lessons</h2>  <!-- Qo‘shilgan sarlavha -->
+    <h2 class="form-title">Mahsulot</h2>  <!-- Qo‘shilgan sarlavha -->
     <form method="post" enctype="multipart/form-data" class="styled-form">
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -24,29 +24,35 @@
             <label for="{{ form.image.id_for_label }}">Rasm</label>
             {{ form.image }}
         </div>
-
         <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Tavsif</label>
-            {{ form.description1 }}
+            <label for="{{ form.category.id_for_label }}">Kategoriyasi</label>
+            {{ form.category }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">Badge</label>
+            {{ form.badge }}
         </div>
 
         <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image1 }}
+            <label for="{{ form.image.id_for_label }}">Specs</label>
+            {{ form.specs }}
         </div>
 
         <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Tavsif</label>
-            {{ form.description2 }}
+            <label for="{{ form.description.id_for_label }}">Narxi</label>
+            {{ form.price }}
         </div>
-
         <div class="form-group">
-            <label for="{{ form.image.id_for_label }}">Rasm</label>
-            {{ form.image2 }}
+            <label for="{{ form.description.id_for_label }}">Ishlab chiqarilgan mamlakat</label>
+            {{ form.country }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">Sertifikati</label>
+            {{ form.certificates }}
         </div>
         <div class="form-buttons">
             <button type="submit" class="submit-btn">💾 Saqlash</button>
-            <a href="{% url 'lessons_list' %}" class="cancel-btn">⬅️ Orqaga</a>
+            <a href="{% url 'product_list' %}" class="cancel-btn">⬅️ Orqaga</a>
         </div>
     </form>
 </div>

@@ -21,10 +21,10 @@ urlpatterns = [
     path('overview/<int:id>/delete/', views.manufacturing_overview_delete, name='overview_delete'),
 
     # ManufacturingStat
-    path('stat/', views.statistic_list, name='stat_list'),
-    path('stat/create/', views.statistic_create, name='stat_create'),
-    path('stat/<int:id>/edit/', views.statistic_edit, name='stat_edit'),
-    path('stat/<int:id>/delete/', views.statistic_delete, name='stat_delete'),
+    path('stat/', views.manufacturing_stat_list, name='stat_list'),
+    path('stat/create/', views.manufacturing_stat_create, name='stat_create'),
+    path('stat/<int:id>/edit/', views.manufacturing_stat_edit, name='stat_edit'),
+    path('stat/<int:id>/delete/', views.manufacturing_stat_delete, name='stat_delete'),
 
     # ProductionLine
     path('line/', views.production_line_list, name='line_list'),
@@ -98,14 +98,6 @@ urlpatterns = [
     path("images/<int:id>/edit/", views.image_edit, name="image_edit"),
     path("images/<int:id>/delete/", views.image_delete, name="image_delete"),
 
-    # ==============================
-    # REVIEW URLS
-    # ==============================
-    path("reviews/", views.review_list, name="review_list"),
-    path("reviews/create/", views.review_create, name="review_create"),
-    path("reviews/<int:id>/edit/", views.review_edit, name="review_edit"),
-    path("reviews/<int:id>/delete/", views.review_delete, name="review_delete"),
-
     # Service
     path("services/", views.service_list, name="service_list"),
     path("services/create/", views.service_create, name="service_create"),
@@ -137,10 +129,10 @@ urlpatterns = [
     path("missions/<int:id>/delete/", views.mission_delete, name="mission_delete"),
 
     # MissionPoint
-    path("mission-points/", views.mission_point_list, name="missionpoint_list"),
-    path("mission-points/create/", views.mission_point_create, name="missionpoint_create"),
-    path("mission-points/<int:id>/edit/", views.mission_point_edit, name="missionpoint_edit"),
-    path("mission-points/<int:id>/delete/", views.mission_point_delete, name="missionpoint_delete"),
+    path("mission-points/", views.mission_point_list, name="mission_point_list"),
+    path("mission-points/create/", views.mission_point_create, name="mission_point_create"),
+    path("mission-points/<int:id>/edit/", views.mission_point_edit, name="mission_point_edit"),
+    path("mission-points/<int:id>/delete/", views.mission_point_delete, name="mission_point_delete"),
 
     # Statistic
     path("statistics/", views.statistic_list, name="statistic_list"),
