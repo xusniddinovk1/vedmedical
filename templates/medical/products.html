@@ -129,33 +129,34 @@
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">
-                    <i class="fas fa-flask"></i>
-                    <span>VedMedical</span>
+                    <i class="fas fa-paw"></i>
+                    <span>Vedmedical</span>
                 </div>
-                <p>Sog'liqni saqlash sohasida yuqori sifatli vaksinalar va preparatlar ishlab chiqaruvchi kompaniya.</p>
+                <p>Uy hayvonlari uchun sifatli vaksinalar va dori-darmonlar yetkazib beruvchi ishonchli kompaniya.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    {% for int in internet %}
+                    <a href="{{ int.link }}" target="_blank">
+                        <i class="{{ int.icon }}"></i>
+                    </a>
+                    {% endfor %}
                 </div>
             </div>
             <div class="footer-section">
                 <h3>Tezkor havolalar</h3>
                 <ul>
-                    <li><a href="about.html">Biz haqimizda</a></li>
-                    <li><a href="products.html">Mahsulotlar</a></li>
-                    <li><a href="news.html">Yangiliklar</a></li>
-                    <li><a href="gallery.html">Galereya</a></li>
+                    <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                    <li><a href="{% url 'products' %}">Mahsulotlar</a></li>
+                    <li><a href="{% url 'news' %}">Yangiliklar</a></li>
+                    <li><a href="{% url 'gallery' %}">Galereya</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Mahsulotlar</h3>
+                <h3>Veterinar mahsulotlar</h3>
                 <ul>
-                    <li><a href="#">Vaksinalar</a></li>
-                    <li><a href="#">Preparatlar</a></li>
-                    <li><a href="#">Antibiotiklar</a></li>
-                    <li><a href="#">Vitaminlar</a></li>
+                    <li><a href="{% url 'products' %}">It vaksinasi</a></li>
+                    <li><a href="{% url 'products' %}">Mushuk vaksinasi</a></li>
+                    <li><a href="{% url 'products' %}">Antiparazitar dorilar</a></li>
+                    <li><a href="{% url 'products' %}">Vitaminlar</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -163,21 +164,21 @@
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Toshkent, Chilonzor tumani</span>
+                        <span>{{ contact.address }}</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>+998 90 123 45 67</span>
+                        <span>{{ contact.phone_number }}</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>info@pharmacorp.uz</span>
+                        <span>{{ contact.email }}</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 VedMedical. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; 2024 VetMed. Barcha huquqlar himoyalangan.</p>
         </div>
     </div>
 </footer>
