@@ -41,28 +41,40 @@ def manufacturing_page(request):
     overview = ManufacturingOverview.objects.first()
     lines = ProductionLine.objects.all()
     stats = ManufacturingStat.objects.all()
+    contact = Contact.objects.first()
+    internet = Internet.objects.all()
     return render(request, "medical/manufacturing.html", {
         "overview": overview,
         "stats": stats,
         "lines": lines,
+        "contact": contact,
+        'internet': internet
     })
 
 
 def partners_page(request):
     partners = Partner.objects.all()
     benefits = PartnershipBenefit.objects.all()
+    contact = Contact.objects.first()
+    internet = Internet.objects.all()
     return render(request, "medical/partners.html", {
         "partners": partners,
         "benefits": benefits,
+        "contact": contact,
+        'internet': internet
     })
 
 
 def gallery_page(request):
     categories = GalleryCategory.objects.all()
     galleries = Gallery.objects.all()
+    contact = Contact.objects.first()
+    internet = Internet.objects.all()
     ctx = {
         "categories": categories,
-        "galleries": galleries
+        "galleries": galleries,
+        "contact": contact,
+        'internet': internet
     }
 
     return render(request, "medical/gallery.html", ctx)
@@ -72,35 +84,51 @@ def product_list(request):
     categories = ProductCategory.objects.all()
     products = Product.objects.all()
     features = ProductFeature.objects.all()
+    contact = Contact.objects.first()
+    internet = Internet.objects.all()
 
     return render(request, "medical/products.html", {
         "categories": categories,
         "products": products,
         "features": features,
+        "contact": contact,
+        'internet': internet
     })
 
 
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:3]
+    contact = Contact.objects.first()
+    internet = Internet.objects.all()
 
     return render(request, "medical/product_detail.html", {
         "product": product,
         "related_products": related_products,
+        "contact": contact,
+        'internet': internet
     })
 
 
 def news_page(request):
     educations = News.objects.all()
+    contact = Contact.objects.first()
+    internet = Internet.objects.all()
     ctx = {
-        "educations": educations
+        "educations": educations,
+        "contact": contact,
+        'internet': internet
     }
     return render(request, 'medical/news.html', ctx)
 
 
 def news_detail(request, id):
     education = get_object_or_404(News, pk=id)
+    contact = Contact.objects.first()
+    internet = Internet.objects.all()
     ctx = {
-        'education': education
+        'education': education,
+        "contact": contact,
+        'internet': internet
     }
     return render(request, 'medical/news_detail.html', ctx)

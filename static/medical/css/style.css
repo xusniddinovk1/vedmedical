@@ -69,8 +69,7 @@ body {
     padding: 0.5rem 0;
 }
 
-.nav-link:hover,
-.nav-link.active {
+.nav-link:hover {
     color: #059669;
 }
 
@@ -100,6 +99,7 @@ body {
       url("/static/images/fon/asosiy_rasm.JPG") center/cover no-repeat;
     color: white;
     overflow: hidden;
+    margin-top: 70px;
 }
 
 .hero::before {
