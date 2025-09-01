@@ -105,10 +105,10 @@ urlpatterns = [
     path("services/<int:id>/delete/", views.service_delete, name="service_delete"),
 
     # Feature
-    path("features/", views.product_feature_list, name="product_feature_list"),
-    path("features/create/", views.product_feature_create, name="product_feature_create"),
-    path("features/<int:id>/edit/", views.product_feature_edit, name="product_feature_edit"),
-    path("features/<int:id>/delete/", views.product_feature_delete, name="product_feature_delete"),
+    path("product-features/", views.product_feature_list, name="product_feature_list"),
+    path("product-features/create/", views.product_feature_create, name="product_feature_create"),
+    path("product-features/<int:id>/edit/", views.product_feature_edit, name="product_feature_edit"),
+    path("product-features/<int:id>/delete/", views.product_feature_delete, name="product_feature_delete"),
 
     # Contact
     path("contacts/", views.contact_list, name="contact_list"),

@@ -81,12 +81,10 @@ def product_list(request):
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:3]
-    reviews = product.reviews.all()
 
     return render(request, "medical/product_detail.html", {
         "product": product,
         "related_products": related_products,
-        "reviews": reviews,
     })
 
 

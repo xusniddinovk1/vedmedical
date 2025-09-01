@@ -19,6 +19,9 @@ class ProductForm(forms.ModelForm):
         fields = [
             "category",
             "title",
+            "subtitle",
+            "usage",
+            "composition"
             "description",
             "image",
             "badge",

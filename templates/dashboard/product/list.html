@@ -14,7 +14,10 @@
             <thead>
             <tr>
                 <th class="title">Sarlavha</th>
+                <th class="description">Subtitr</th>
                 <th class="description">Tavsif</th>
+                <th class="description">Qo'llanmasi</th>
+                <th class="description">Tarkibi</th>
                 <th class="image">Rasm</th>
                 <th class="category">Kategoriya</th>
                 <th class="image">Badge</th>
@@ -29,7 +32,10 @@
             {% for txt in products %}
             <tr>
                 <td class="title">{{ txt.title }}</td>
+                <td class="title">{{ txt.subtitle }}</td>
                 <td class="title">{{ txt.description }}</td>
+                <td class="title">{{ txt.usage }}</td>
+                <td class="title">{{ txt.composition }}</td>
                 <td class="image">
                     {% if txt.image %}
                     <img src="{{ txt.image.url }}" alt="Rasm"/>

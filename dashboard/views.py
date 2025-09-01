@@ -738,14 +738,14 @@ def news_delete(request, id):
 
 def product_category_list(request):
     categories = ProductCategory.objects.all()
-    return render(request, "dashboard/category/list.html", {"categories": categories})
+    return render(request, "dashboard/product_category/list.html", {"categories": categories})
 
 
 def product_category_create(request):
     form = ProductCategoryForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect("category_list")
+        return redirect("product_category_list")
     return render(request, "dashboard/category/form.html", {"form": form})
 
 
@@ -754,14 +754,14 @@ def product_category_edit(request, id):
     form = ProductCategoryForm(request.POST or None, instance=category)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect("category_list")
+        return redirect("product_category_list")
     return render(request, "dashboard/category/form.html", {"form": form, "category": category})
 
 
 def product_category_delete(request, id):
     category = get_object_or_404(ProductCategory, id=id)
     category.delete()
-    return redirect("category_list")
+    return redirect("product_category_list")
 
 
 # ==============================

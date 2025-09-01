@@ -96,19 +96,6 @@
 
                 <h1 class="product-title">{{ product.title }}</h1>
 
-                <div class="product-rating">
-                    <div class="stars">
-                        {% for i in "12345" %}
-                        {% if product.rating|floatformat:0 >= i %}
-                        <i class="fas fa-star"></i>
-                        {% else %}
-                        <i class="far fa-star"></i>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                    <span class="rating-text">({{ product.rating }}/5 - {{ product.reviews_count }} ta baholash)</span>
-                </div>
-
                 {% if product.country %}
                 <div class="product-country">
                     <i class="fas fa-globe"></i>
@@ -138,56 +125,54 @@
                     <div class="price-section">
                         <div class="current-price">${{ product.price }}</div>
                         {% if product.old_price %}
-                        <div class="original-price">${{ product.old_price }}</div>
-                        <div class="discount-badge">
-                            -{{ product.price|divisibleby:product.old_price }}% chegirma
-                        </div>
-                        {% endif %}
-                    </div>
-                    <div class="availability">
-                        {% if product.stock_status %}
-                        <div class="stock-status available">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Omborda mavjud</span>
-                        </div>
-                        {% else %}
-                        <div class="stock-status unavailable">
-                            <i class="fas fa-times-circle"></i>
-                            <span>Mavjud emas</span>
-                        </div>
+                        <!--                        <div class="original-price">${{ product.old_price }}</div>-->
+                        <!--                        <div class="discount-badge">-->
+                        <!--                            -{{ product.price|divisibleby:product.old_price }}% chegirma-->
+                        <!--                        </div>-->
                         {% endif %}
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="product-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="openTab(event, 'description')">Ta'rif</button>
+                    <button class="tab-btn" onclick="openTab(event, 'usage')">Qo'llash yo'riqnomasi</button>
+                    <button class="tab-btn" onclick="openTab(event, 'composition')">Tarkib</button>
+                    <button class="tab-btn" onclick="openTab(event, 'reviews')">Sharhlar</button>
+                </div>
 
-        <!-- Reviews -->
-        <div id="reviews" class="tab-panel">
-            <h3>Foydalanuvchi sharhlari</h3>
-            {% for review in reviews %}
-            <div class="review-item">
-                <div class="review-header">
-                    <div class="reviewer-info">
-                        <strong>{{ review.reviewer }}</strong>
-                        <span class="review-date">{{ review.created_at }}</span>
+                <div class="tab-content">
+                    <!-- Description -->
+                    <div id="description" class="tab-panel active">
+                        <h3>Mahsulot haqida batafsil ma'lumot</h3>
+                        <p>{{ product.description|linebreaks }}</p>
                     </div>
-                    <div class="review-rating">
-                        {% for i in "12345" %}
-                        {% if review.rating >= i|add:"0"|int %}
-                        <i class="fas fa-star"></i>
+
+                    <!-- Usage -->
+                    <div id="usage" class="tab-panel">
+                        <h3>Qo'llash yo'riqnomasi</h3>
+                        <p>{{ product.usage|linebreaks }}</p>
+                    </div>
+
+                    <!-- Composition -->
+                    <div id="composition" class="tab-panel">
+                        <h3>Tarkib va formulation</h3>
+                        <p>{{ product.composition|linebreaks }}</p>
+                    </div>
+
+                    <!-- Reviews -->
+                    <div id="reviews" class="tab-panel">
+                        <h3>Sharhlar</h3>
+                        {% if product.reviews %}
+                        <p>{{ product.reviews|linebreaks }}</p>
                         {% else %}
-                        <i class="far fa-star"></i>
+                        <p>Hozircha sharhlar yo‘q.</p>
                         {% endif %}
-                        {% endfor %}
                     </div>
                 </div>
-                <p>{{ review.comment }}</p>
             </div>
-            {% empty %}
-            <p>Hozircha sharhlar mavjud emas.</p>
-            {% endfor %}
-        </div>
 
+        </div>
         <!-- Related Products -->
         <section class="related-products">
             <h2>O'xshash mahsulotlar</h2>

@@ -11,7 +11,10 @@ class ProductCategory(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name="products")
     title = models.CharField(max_length=200)
+    subtitle = models.TextField()
     description = models.TextField()
+    usage = models.TextField()  # Qo'llash yo'riqnomasi
+    composition = models.TextField()  # Tarkib
     image = models.ImageField(upload_to="products/")  # asosiy rasm
     badge = models.CharField(max_length=50, blank=True, null=True)  # "Yangi", "Mashhur"
     specs = models.JSONField(default=dict, blank=True)  # {"hajm": "1ml", "harorat": "2-8°C"}
