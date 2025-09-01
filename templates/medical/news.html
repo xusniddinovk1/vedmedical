@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-{% load static %}
-{% load humanize %}
-<html lang="uz">
+{% load static %} {% load humanize %}
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yangiliklar - VedMedical</title>
-    <link rel="stylesheet" href="{% static 'medical/css/style.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'medical/css/style.css' %}"/>
+    <script
+            src="https://kit.fontawesome.com/5974a913f2.js"
+            crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>O'quv bo'limi</title>
 </head>
 <body>
-<!-- Header -->
+<!-- ======================= Header ======================= -->
 <header class="header">
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <i class="fas fa-flask"></i>
-                <span>VedMedical</span>
+                <i class="fas fa-paw"></i>
+                <span>Vedmedical</span>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -52,78 +52,147 @@
         </div>
     </nav>
 </header>
-
-<!-- Page Header -->
-<section class="page-header">
-    <div class="container">
-        <h1>Yangiliklar</h1>
-        <p>Kompaniya faoliyati va sanoat yangiliklari</p>
+<!-- ======================= Card Section ======================= -->
+<div class="wrapper">
+    <div class="card-container">
+        {% for education in educations %}
+        <div class="card">
+            <a href="{% url 'uz:oquvbolim_sahifa' education.id %}">
+                <img src="{{ education.image.url }}" alt="Camp Image"/>
+            </a>
+            <div class="card-content">
+                <h2 class="card-title">{{ education.title|truncatechars:30 }}</h2>
+                <p class="card-description">
+                    {{ education.description|truncatechars:40 }}
+                </p>
+                <a href="{% url 'uz:oquvbolim_sahifa' education.id %}" class="btn"
+                >Batafsil</a
+                >
+            </div>
+        </div>
+        {% endfor %}
     </div>
-</section>
+</div>
 
-<!-- News Grid -->
-<section class="news">
-    <div class="container">
-        <div class="news-grid">
-            {% for item in news_list %}
-            <article class="news-card {% if forloop.first %}featured{% endif %}">
-                <div class="news-image">
-                    <img src="{{ item.image.url }}" alt="{{ item.title }}">
-                    {% if forloop.first %}
-                    <div class="news-badge">Asosiy</div>
-                    {% endif %}
-                </div>
-                <div class="news-content">
-                    <div class="news-meta">
-                        <span class="news-date">{{ item.date|date:"d F Y" }}</span>
-                        <span class="news-category">{{ item.category.name }}</span>
-                    </div>
-                    {% if forloop.first %}
-                    <h2>{{ item.title }}</h2>
-                    {% else %}
-                    <h3>{{ item.title }}</h3>
-                    {% endif %}
-                    <p>{{ item.content|truncatewords:20 }}</p>
-                    <a href="{% url 'news_detail' item.id %}" class="read-more">Batafsil o'qish <i
-                            class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-            {% endfor %}
+<!-- ======================= Modal ======================= -->
+<div class="modal" id="newsModal" role="dialog" aria-hidden="true">
+    <div class="modal-content" id="modalContent">
+        <span
+                class="modal-close"
+                onclick="closeModal()"
+                aria-label="Close Modal"
+        >&times;</span
+        >
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
         </div>
     </div>
-</section>
+</div>
 
-<!-- Footer -->
+<!-- ======================= Footer ======================= -->
 <footer class="footer">
     <div class="container">
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo">
-                    <i class="fas fa-flask"></i>
-                    <span>PharmaCorp</span>
+                    <i class="fas fa-paw"></i>
+                    <span>Vedmedical</span>
                 </div>
-                <p>Sog'liqni saqlash sohasida yuqori sifatli vaksinalar va preparatlar ishlab chiqaruvchi kompaniya.</p>
+                <p>Uy hayvonlari uchun sifatli vaksinalar va dori-darmonlar yetkazib beruvchi ishonchli kompaniya.</p>
+                <div class="social-links">
+                    {% for int in internet %}
+                    <a href="{{ int.link }}" target="_blank">
+                        <i class="{{ int.icon }}"></i>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Tezkor havolalar</h3>
+                <ul>
+                    <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                    <li><a href="{% url 'products' %}">Mahsulotlar</a></li>
+                    <li><a href="{% url 'news' %}">Yangiliklar</a></li>
+                    <li><a href="{% url 'gallery' %}">Galereya</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Veterinar mahsulotlar</h3>
+                <ul>
+                    <li><a href="{% url 'products' %}">It vaksinasi</a></li>
+                    <li><a href="{% url 'products' %}">Mushuk vaksinasi</a></li>
+                    <li><a href="{% url 'products' %}">Antiparazitar dorilar</a></li>
+                    <li><a href="{% url 'products' %}">Vitaminlar</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h3>Aloqa</h3>
                 <div class="contact-info">
                     <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ contact.address }}</span>
+                    </div>
+                    <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>+998 90 123 45 67</span>
+                        <span>{{ contact.phone_number }}</span>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>info@pharmacorp.uz</span>
+                        <span>{{ contact.email }}</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 VedMedical. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; 2024 VetMed. Barcha huquqlar himoyalangan.</p>
         </div>
     </div>
 </footer>
 
-<script src="js/script.js"></script>
+<!-- ======================= Scripts ======================= -->
+<script>
+    function showModal(title, text) {
+      document.getElementById("modalTitle").innerText = title;
+      document.getElementById("modalText").innerText = text;
+      document.getElementById("newsModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("newsModal").style.display = "none";
+    }
+
+    // Language dropdown handler (if used in future)
+    const dropdownButton = document.getElementById("languageDropdown");
+    const languageMenu = document.getElementById("languageMenu");
+
+    if (dropdownButton && languageMenu) {
+      const languageItems = languageMenu.querySelectorAll("li");
+
+      dropdownButton.addEventListener("click", () => {
+        languageMenu.classList.toggle("hidden");
+      });
+
+      languageItems.forEach((item) => {
+        item.addEventListener("click", (event) => {
+          const selectedLang = event.target.getAttribute("data-lang");
+          alert(`Language switched to: ${selectedLang}`);
+          languageMenu.classList.add("hidden");
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        if (
+          !dropdownButton.contains(event.target) &&
+          !languageMenu.contains(event.target)
+        ) {
+          languageMenu.classList.add("hidden");
+        }
+      });
+    }
+</script>
 </body>
 </html>
