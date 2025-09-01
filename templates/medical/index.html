@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetMed - Uy hayvonlari uchun vaksinalar va dori-darmonlar</title>
+    <title>Vedmedical - Uy hayvonlari uchun vaksinalar va dori-darmonlar</title>
     <link rel="stylesheet" href="{% static 'medical/css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,9 +19,8 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <i class="fas fa-paw"></i>
-                <span>VetMed</span>
+                <span>Vedmedical</span>
             </div>
-            <ul class="nav-menu">
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="{% url 'home' %}" class="nav-link">Bosh sahifa</a>
@@ -54,6 +53,7 @@
     </nav>
 </header>
 
+
 <!-- Hero Section -->
 <section class="hero">
     <div class="hero-content">
@@ -62,8 +62,8 @@
             mushuk va boshqa uy hayvonlari uchun xalqaro standartlarga javob beradigan yuqori sifatli vaksinalar va
             dori-darmonlarni taklif etamiz.</p>
         <div class="hero-buttons">
-            <a href="products.html" class="btn btn-primary">Veterinar mahsulotlari</a>
-            <a href="about.html" class="btn btn-secondary">Biz haqimizda</a>
+            <a href="{% url 'products'%}" class="btn btn-primary">Mahsulotlarimiz</a>
+            <a href="{% url 'about' %}" class="btn btn-secondary">Biz haqimizda</a>
         </div>
     </div>
 </section>
@@ -81,7 +81,7 @@
                 <div class="service-icon">
                     <i class="{{ service.icon }}"></i>
                 </div>
-                <h3>{{ service.nomi }}</h3>
+                <h3>{{ service.title }}</h3>
                 <p>{{ service.description }}</p>
             </div>
             {% endfor %}
@@ -97,7 +97,7 @@
             <div class="features-text">
                 <h2>Nima uchun uy hayvon egallari bizni tanlashadi?</h2>
                 <div class="feature-list">
-                    {% for feature in feature %}
+                    {% for feature in features %}
                     <div class="feature-item">
                         <i class="{{ feature.icon }}"></i>
                         <div>
@@ -128,7 +128,7 @@
                     <i class="fas fa-phone"></i>
                     Qo'ng'iroq qilish
                 </a>
-                <a href="products.html" class="btn btn-outline">Veterinar mahsulotlar</a>
+                <a href="{% url 'products'%}" class="btn btn-outline">Veterinar mahsulotlar</a>
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@
             <div class="footer-section">
                 <div class="footer-logo">
                     <i class="fas fa-paw"></i>
-                    <span>VetMed</span>
+                    <span>Vedmedical</span>
                 </div>
                 <p>Uy hayvonlari uchun sifatli vaksinalar va dori-darmonlar yetkazib beruvchi ishonchli kompaniya.</p>
                 <div class="social-links">
@@ -155,19 +155,19 @@
             <div class="footer-section">
                 <h3>Tezkor havolalar</h3>
                 <ul>
-                    <li><a href="about.html">Biz haqimizda</a></li>
-                    <li><a href="products.html">Mahsulotlar</a></li>
-                    <li><a href="news.html">Yangiliklar</a></li>
-                    <li><a href="gallery.html">Galereya</a></li>
+                    <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                    <li><a href="{% url 'products' %}">Mahsulotlar</a></li>
+                    <li><a href="{% url 'news' %}">Yangiliklar</a></li>
+                    <li><a href="{% url 'gallery' %}">Galereya</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Veterinar mahsulotlar</h3>
                 <ul>
-                    <li><a href="#">It vaksinasi</a></li>
-                    <li><a href="#">Mushuk vaksinasi</a></li>
-                    <li><a href="#">Antiparazitar dorilar</a></li>
-                    <li><a href="#">Vitaminlar</a></li>
+                    <li><a href="{% url 'products' %}">It vaksinasi</a></li>
+                    <li><a href="{% url 'products' %}">Mushuk vaksinasi</a></li>
+                    <li><a href="{% url 'products' %}">Antiparazitar dorilar</a></li>
+                    <li><a href="{% url 'products' %}">Vitaminlar</a></li>
                 </ul>
             </div>
             <div class="footer-section">

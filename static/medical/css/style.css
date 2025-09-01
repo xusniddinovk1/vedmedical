@@ -90,12 +90,14 @@ body {
 
 /* Hero Section */
 .hero {
+    height: 100vh;
     display: flex;
     align-items: center;
     min-height: 100vh;
     padding: 0;
     position: relative;
-    background: linear-gradient(135deg, rgba(5, 150, 105, 0.8) 0%, rgba(4, 120, 87, 0.9) 100%), url('https://images.unsplash.com/photo-1564149149471-86ba4e8d0c18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    background:
+      url("/static/images/fon/asosiy_rasm.JPG") center/cover no-repeat;
     color: white;
     overflow: hidden;
 }

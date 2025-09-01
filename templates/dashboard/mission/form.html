@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group">
-            <label for="{{ form.description.id_for_label }}">Tavsif</label>
+            <label for="{{ form.context.id_for_label }}">Tavsif</label>
             {{ form.context }}
         </div>
 
@@ -24,6 +24,7 @@
             <label for="{{ form.image.id_for_label }}">Rasm</label>
             {{ form.image }}
         </div>
+
         <div class="form-buttons">
             <button type="submit" class="submit-btn">💾 Saqlash</button>
             <a href="{% url 'mission_list' %}" class="cancel-btn">⬅️ Orqaga</a>

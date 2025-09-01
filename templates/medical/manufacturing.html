@@ -70,7 +70,7 @@
                 <p>{{ overview.description }}</p>
 
                 <div class="manufacturing-stats">
-                    {% for stat in overview.stats.all %}
+                    {% for stat in stats %}
                     <div class="stat-item">
                         <div class="stat-number">{{ stat.number }}</div>
                         <div class="stat-label">{{ stat.label }}</div>

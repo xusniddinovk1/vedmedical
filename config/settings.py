@@ -25,7 +25,10 @@ INSTALLED_APPS = [
 
     'medical',
     'dashboard',
-    'custom_auth'
+    'custom_auth',
+
+    "ckeditor",
+    "ckeditor_uploader",
 ]
 
 MIDDLEWARE = [
@@ -92,7 +95,29 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"  # collectstatic shu papkaga yig‘adi
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "full",  # Full toolbar
+        "height": 400,
+        "width": "100%",
+        "extraPlugins": ",".join(
+            [
+                "uploadimage",  # Rasm yuklash
+                "youtube",  # YouTube video qo‘shish
+                "codesnippet",  # Kod bloklari
+                "emoji",  # Emoji qo‘shish
+                "colorbutton", "colordialog",  # Ranglar
+                "table",  # Jadval qo‘shish
+            ]
+        ),
+    },
+}

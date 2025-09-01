@@ -40,8 +40,10 @@ def about(request):
 def manufacturing_page(request):
     overview = ManufacturingOverview.objects.first()
     lines = ProductionLine.objects.all()
+    stats = ManufacturingStat.objects.all()
     return render(request, "medical/manufacturing.html", {
         "overview": overview,
+        "stats": stats,
         "lines": lines,
     })
 

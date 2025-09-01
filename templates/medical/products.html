@@ -88,7 +88,7 @@
                 <div class="product-info">
                     <h3>{{ item.title }}</h3>
                     <p class="product-category"><i class="fas fa-syringe"></i> {{ item.category.name }}</p>
-                    <p class="product-description">{{ item.description }}</p>
+                    <p class="product-description">{{ item.subtitle |truncatechars:100 }}</p>
                     <div class="product-specs">
                         {% for key, value in item.specs.items %}
                         <span><i class="fas fa-check"></i> {{ value }}</span>

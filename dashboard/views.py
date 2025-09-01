@@ -267,7 +267,7 @@ def mission_list(request):
 
 
 def mission_create(request):
-    form = MissionForm(request.POST or None)
+    form = MissionForm(request.POST or None, request.FILES or None)
     if request.method == "POST" and form.is_valid():
         form.save()
         return redirect("mission_list")
@@ -276,7 +276,7 @@ def mission_create(request):
 
 def mission_edit(request, id):
     mission = get_object_or_404(Mission, id=id)
-    form = MissionForm(request.POST or None, instance=mission)
+    form = MissionForm(request.POST or None, request.FILES or None, instance=mission)
     if request.method == "POST" and form.is_valid():
         form.save()
         return redirect("mission_list")
@@ -485,7 +485,7 @@ def manufacturing_overview_create(request):
     form = ManufacturingOverviewForm(request.POST or None, request.FILES or None)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('manufacturing_overview_list')
+        return redirect('overview_list')
     return render(request, 'dashboard/overview/form.html', {'form': form})
 
 
@@ -494,14 +494,14 @@ def manufacturing_overview_edit(request, id):
     form = ManufacturingOverviewForm(request.POST or None, request.FILES or None, instance=obj)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('manufacturing_overview_list')
+        return redirect('overview_list')
     return render(request, 'dashboard/overview/form.html', {'form': form, 'object': obj})
 
 
 def manufacturing_overview_delete(request, id):
     obj = get_object_or_404(ManufacturingOverview, id=id)
     obj.delete()
-    return redirect('manufacturing_overview_list')
+    return redirect('overview_list')
 
 
 # ---------------- MANUFACTURING STAT ----------------
@@ -514,7 +514,7 @@ def manufacturing_stat_create(request):
     form = ManufacturingStatForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('manufacturing_stat_list')
+        return redirect('stat_list')
     return render(request, 'dashboard/stat/form.html', {'form': form})
 
 
@@ -523,14 +523,14 @@ def manufacturing_stat_edit(request, id):
     form = ManufacturingStatForm(request.POST or None, instance=obj)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('manufacturing_stat_list')
+        return redirect('stat_list')
     return render(request, 'dashboard/stat/form.html', {'form': form, 'object': obj})
 
 
 def manufacturing_stat_delete(request, id):
     obj = get_object_or_404(ManufacturingStat, id=id)
     obj.delete()
-    return redirect('manufacturing_stat_list')
+    return redirect('stat_list')
 
 
 # ---------------- PRODUCTION LINE ----------------
@@ -543,7 +543,7 @@ def production_line_create(request):
     form = ProductionLineForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('production_line_list')
+        return redirect('line_list')
     return render(request, 'dashboard/line/form.html', {'form': form})
 
 
@@ -552,14 +552,14 @@ def production_line_edit(request, id):
     form = ProductionLineForm(request.POST or None, instance=obj)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('production_line_list')
+        return redirect('line_list')
     return render(request, 'dashboard/line/form.html', {'form': form, 'object': obj})
 
 
 def production_line_delete(request, id):
     obj = get_object_or_404(ProductionLine, id=id)
     obj.delete()
-    return redirect('production_line_list')
+    return redirect('line_list')
 
 
 # ---------------- PARTNER ----------------
@@ -601,7 +601,7 @@ def partnership_benefit_create(request):
     form = PartnershipBenefitForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('partnership_benefit_list')
+        return redirect('benefit_list')
     return render(request, 'dashboard/benefit/form.html', {'form': form})
 
 
@@ -610,14 +610,14 @@ def partnership_benefit_edit(request, id):
     form = PartnershipBenefitForm(request.POST or None, instance=obj)
     if request.method == "POST" and form.is_valid():
         form.save()
-        return redirect('partnership_benefit_list')
+        return redirect('benefit_list')
     return render(request, 'dashboard/benefit/form.html', {'form': form, 'object': obj})
 
 
 def partnership_benefit_delete(request, id):
     obj = get_object_or_404(PartnershipBenefit, id=id)
     obj.delete()
-    return redirect('partnership_benefit_list')
+    return redirect('benefit_list')
 
 
 # ---------------- GALLERY CATEGORY ----------------

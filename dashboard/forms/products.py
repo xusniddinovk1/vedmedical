@@ -21,7 +21,7 @@ class ProductForm(forms.ModelForm):
             "title",
             "subtitle",
             "usage",
-            "composition"
+            "composition",
             "description",
             "image",
             "badge",
