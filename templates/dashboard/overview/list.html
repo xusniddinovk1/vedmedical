@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container center-content">
     <div style="text-align: right; margin-bottom: 1rem;">
-        <a href="{% url 'manufacturing_overview_create' %}" class="btn btn-success">➕ Yangi bo‘lim qo‘shish</a>
+        <a href="{% url 'overview_create' %}" class="btn btn-success">➕ Yangi bo‘lim qo‘shish</a>
     </div>
     <div class="table-wrapper">
         <table class="table">
@@ -32,8 +32,8 @@
                     {% endif %}
                 </td>
                 <td class="actions">
-                    <a href="{% url 'manufacturing_overview_edit' txt.id %}" class="btn btn-warning btn-sm">✏️</a>
-                    <a href="{% url 'manufacturing_overview_delete' txt.id %}" class="btn btn-danger btn-sm">🗑️</a>
+                    <a href="{% url 'overview_edit' txt.id %}" class="btn btn-warning btn-sm">✏️</a>
+                    <a href="{% url 'overview_delete' txt.id %}" class="btn btn-danger btn-sm">🗑️</a>
                 </td>
             </tr>
             {% empty %}

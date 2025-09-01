@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
+{% load humanize %}
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yangiliklar - VedMedical</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{% static 'medical/css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,25 +23,25 @@
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">Bosh sahifa</a>
+                    <a href="{% url 'home' %}" class="nav-link">Bosh sahifa</a>
                 </li>
                 <li class="nav-item">
-                    <a href="about.html" class="nav-link">Biz haqimizda</a>
+                    <a href="{% url 'about' %}" class="nav-link">Biz haqimizda</a>
                 </li>
                 <li class="nav-item">
-                    <a href="products.html" class="nav-link">Mahsulotlar</a>
+                    <a href="{% url 'products' %}" class="nav-link active">Mahsulotlar</a>
                 </li>
                 <li class="nav-item">
-                    <a href="manufacturing.html" class="nav-link">Ishlab chiqarish</a>
+                    <a href="{% url 'manufacturing' %}" class="nav-link">Ishlab chiqarish</a>
                 </li>
                 <li class="nav-item">
-                    <a href="partners.html" class="nav-link">Hamkorlar</a>
+                    <a href="{% url 'partners' %}" class="nav-link">Hamkorlar</a>
                 </li>
                 <li class="nav-item">
-                    <a href="news.html" class="nav-link active">Yangiliklar</a>
+                    <a href="{% url 'news' %}" class="nav-link">Yangiliklar</a>
                 </li>
                 <li class="nav-item">
-                    <a href="gallery.html" class="nav-link">Galereya</a>
+                    <a href="{% url 'gallery' %}" class="nav-link">Galereya</a>
                 </li>
             </ul>
             <div class="hamburger">
