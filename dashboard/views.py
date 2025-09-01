@@ -73,7 +73,6 @@ def home_page(request):
     members = Member.objects.all()
     galleries = Gallery.objects.all()
     product_categories = ProductCategory.objects.all()
-    features = Feature.objects.all()
     statistics = Statistic.objects.all()
     achievements = Achievement.objects.all()
 
