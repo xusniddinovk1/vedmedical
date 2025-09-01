@@ -20,6 +20,7 @@ def login_page(request):
         user = authenticate(request, phone_number=phone, password=password)
         if user:
             login(request, user)
+            return redirect('home_page')
         else:
             return render(request, "dashboard/login.html", {"error": "Incorrect credentials"})
 
@@ -81,70 +82,56 @@ def home_page(request):
             "icon": "fa-users",
             "color": "#3b82f6",  # blue-500
             "count": products.count(),
-            "label": "Users",
+            "label": "Mahsulotlar",
             "chart_data": [products.count(), products.count() // 2, products.count() // 3]
         },
         {
             "icon": "fa-book",
             "color": "#10b981",  # green-500
             "count": news.count(),
-            "label": "News",
+            "label": "Yangiliklar",
             "chart_data": [news.count(), news.count() // 2, news.count() // 3]
         },
         {
             "icon": "fa-bell",
             "color": "#ef4444",  # red-500
             "count": partners.count(),
-            "label": "Courses",
+            "label": "Hamkorlar",
             "chart_data": [partners.count(), partners.count() // 2, partners.count() // 3]
         },
         {
             "icon": "fa-star",
             "color": "#facc15",  # yellow-500
             "count": members.count(),
-            "label": "Lessons",
+            "label": "Jamoa a'zolari",
             "chart_data": [members.count(), members.count() // 2, members.count() // 3]
         },
         {
             "icon": "fa-users",
             "color": "#3b82f6",  # blue-500
             "count": galleries.count(),
-            "label": "Users",
+            "label": "Rasmlar",
             "chart_data": [galleries.count(), galleries.count() // 2, galleries.count() // 3]
-        },
-        {
-            "icon": "fa-book",
-            "color": "#10b981",  # green-500
-            "count": news.count(),
-            "label": "News",
-            "chart_data": [news.count(), news.count() // 2, news.count() // 3]
         },
         {
             "icon": "fa-bell",
             "color": "#ef4444",  # red-500
             "count": product_categories.count(),
-            "label": "Courses",
+            "label": "Mahsulot kategoriyasi",
             "chart_data": [product_categories.count(), product_categories.count() // 2, product_categories.count() // 3]
-        },
-        {
-            "icon": "fa-star",
-            "color": "#facc15",  # yellow-500
-            "count": features.count(),
-            "label": "Lessons",
-            "chart_data": [features.count(), features.count() // 2, features.count() // 3]
         },
         {
             "icon": "fa-users",
             "color": "#3b82f6",  # blue-500
             "count": statistics.count(),
-            "label": "Users",
+            "label": "Statistikalar",
             "chart_data": [statistics.count(), statistics.count() // 2, statistics.count() // 3]
         },
         {
             "icon": "fa-book",
             "color": "#10b981",  # green-500
             "count": achievements.count(),
-            "label": "News",
+            "label": "Yutuqlar",
             "chart_data": [achievements.count(), achievements.count() // 2, achievements.count() // 3]
         },
     ]

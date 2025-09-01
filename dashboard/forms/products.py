@@ -4,14 +4,13 @@ from medical.models import (
     Product,
     ProductFeature,
     ProductImage,
-    ProductReview,
 )
 
 
 class ProductCategoryForm(forms.ModelForm):
     class Meta:
         model = ProductCategory
-        fields = ["name", "slug"]
+        fields = ["name"]
 
 
 class ProductForm(forms.ModelForm):
@@ -25,12 +24,8 @@ class ProductForm(forms.ModelForm):
             "badge",
             "specs",
             "price",
-            "old_price",
             "country",
             "certificates",
-            "stock_status",
-            "rating",
-            "reviews_count",
         ]
 
 
@@ -44,9 +39,3 @@ class ProductImageForm(forms.ModelForm):
     class Meta:
         model = ProductImage
         fields = ["product", "image"]
-
-
-class ProductReviewForm(forms.ModelForm):
-    class Meta:
-        model = ProductReview
-        fields = ["product", "reviewer", "rating", "comment"]
