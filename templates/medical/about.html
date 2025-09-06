@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biz haqimizda - VedMedical</title>
+    <title>Biz haqimizda - Vedmedical</title>
     <link rel="stylesheet" href="{% static 'medical/css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +57,7 @@
 <section class="page-header">
     <div class="container">
         <h1>Biz haqimizda</h1>
-        <p>VedMedical - sog'liqni saqlash sohasidagi yetakchi kompaniya</p>
+        <p>Vedmedical - sog'liqni saqlash sohasidagi yetakchi kompaniya</p>
     </div>
 </section>
 
@@ -132,7 +132,7 @@
     <div class="container">
         <div class="section-header">
             <h2>Bizning yutuqlarimiz</h2>
-            <p>VedMedical kompaniyasining erishgan muvaffaqiyatlari</p>
+            <p>Vedmedical kompaniyasining erishgan muvaffaqiyatlari</p>
         </div>
         <div class="achievements-grid">
             {% for achievement in achievements %}
@@ -178,7 +178,7 @@
     <div class="container">
         <div class="section-header">
             <h2>Bizning tariximiz</h2>
-            <p>PharmaCorp kompaniyasining rivojlanish bosqichlari</p>
+            <p>Vedmedical kompaniyasining rivojlanish bosqichlari</p>
         </div>
         <div class="timeline">
             {% for history in histories %}
@@ -250,11 +250,11 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 VetMed. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; 2024 Vetmedical. Barcha huquqlar himoyalangan.</p>
         </div>
     </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="{% static 'medical/js/script.js' %}"></script>
 </body>
 </html>
