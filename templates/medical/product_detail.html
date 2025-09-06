@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahsulot tafsilotlari - VetMed</title>
+    <title>Mahsulot tafsilotlari - Vedmedical</title>
     <link rel="stylesheet" href="{% static 'medical/css/style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
         <div class="nav-container">
             <div class="nav-logo">
                 <i class="fas fa-paw"></i>
-                <span>VetMed</span>
+                <span>Vetmedical</span>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -124,12 +124,6 @@
                 <div class="product-pricing">
                     <div class="price-section">
                         <div class="current-price">{{ product.price}} so'm</div>
-                        {% if product.old_price %}
-                        <!--                        <div class="original-price">${{ product.old_price }}</div>-->
-                        <!--                        <div class="discount-badge">-->
-                        <!--                            -{{ product.price|divisibleby:product.old_price }}% chegirma-->
-                        <!--                        </div>-->
-                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -251,12 +245,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 VetMed. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; 2024 Vetmedical. Barcha huquqlar himoyalangan.</p>
         </div>
     </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="{% static 'medical/js/script.js' %}"></script>
 <script>
     // Tab switching functionality
     function openTab(evt, tabName) {
